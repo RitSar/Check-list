@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>To Do List</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   </head>
   <body>
 
@@ -15,18 +16,25 @@
 
     <div class="box">
 
-      <%  for(var i=0;i<newListItems.length;i++){ %>
+      <%  newListItems.forEach((item)=>{ %>
         <div class="item">
-          <input type="checkbox">
-          <p><%= newListItems[i] %></p>
+          <input type="checkbox" name="checkbox" onclick="this.form.submit();" value="<%= item._id %>">
+          <p><%= item.name %></p>
+          <form class="bin" action="/delete" method="post">
+            <button type="submit" name="bin" value="<%= item._id %>">
+              <i class="fa fa-trash"></i>
+            </button>
+          </form>
         </div>
-      <%  } %>
+        <%  }) %>
 
-      <form class="item" action="/" method="post">
-        <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
-        <button type="submit" name="list" value=<%= listTitle %>>+</button>
-      </form>
-    </div>
+          <form class="item" action="/" method="post">
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+            <button class="add" type="submit" name="list" value=<%= listTitle %>>
+              <i class="fa fa-plus"></i>
+            </button>
+          </form>
+        </div>
 
-  </body>
-</html>
+      </body>
+    </html>

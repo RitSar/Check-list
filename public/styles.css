@@ -53,12 +53,22 @@ p {
   color: #00204a;
 }
 
-form {
+.bin {
+  margin-left: auto;
+  padding-right: 10px;
+}
+
+.fa-plus {
+  position: relative;
+  top: 3px;
+}
+
+form.item {
   text-align: center;
   margin-left: 20px;
 }
 
-button {
+button.add {
   min-height: 50px;
   width: 50px;
   border-radius: 50%;

@@ -1,6 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const mongoose = require('mongoose');
 const app = express();
 app.set('view engine', 'ejs');
 
@@ -9,8 +9,31 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
+mongoose.connect("mongodb://localhost:27017/todolistDB", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+const itemsSchema = {
+  name: String,
+  check: String
+};
+const Item = mongoose.model("Item", itemsSchema);
+
+const item1 = new Item({
+  name: "Welcome to your todo list.",
+  check: "off"
+});
+const item2 = new Item({
+  name: "Use + to add a new item.",
+  check: "off"
+});
+const item3 = new Item({
+  name: "<-- Check to strike through.",
+  check: "off"
+});
+
+
 let today = new Date();
-let items = ["Buy food", "Cook food", "Eat food"];
 let options = {
   weekday: "long",
   day: "numeric",
@@ -18,23 +41,67 @@ let options = {
 }
 let date = today.toLocaleDateString("en-US", options);
 let workItems = [];
+
 app.get("/", (req, res) => {
-  res.render("list", {
-    listTitle: date,
-    newListItems: items
+  Item.find({}, (err, foundItems) => {
+    if (foundItems.length === 0) {
+      Item.insertMany([item1, item2, item3], (err) => {
+        if (err) console.log(err);
+        else console.log("Successfully added default items to database.");
+      });
+      res.redirect("/");
+    }
+    res.render("list", {
+      listTitle: date,
+      newListItems: foundItems
+    });
   });
+
 });
 
 app.post("/", function(req, res) {
-  item = req.body.newItem;
-  if (req.body.list === "Work") {
-    workItems.push(item);
-    res.redirect("/Work");
-  } else {
-    items.push(item);
-    res.redirect("/");
-  }
+  const itemName = req.body.newItem;
+  const item = new Item({
+    name: itemName,
+    check: "off"
+  });
+  item.save();
+  res.redirect("/");
+});
 
+// app.post("/check", (req, res) => {
+//   const checkItemId = req.body.checkbox;
+//   let checker = "";
+//   Item.findById(checkItemId, (err, item) => {
+//     if (err) console.log(err);
+//     else {
+//       if (item.check == "off") {
+//         Item.findByIdAndUpdate(checkItemId, {
+//           check: "on"
+//         }, (err) => {
+//           if (err) console.log(err);
+//           else console.log("Successfully checked");
+//         });
+//       } else {
+//         Item.findByIdAndUpdate(checkItemId, {
+//           check: "off"
+//         }, (err) => {
+//           if (err) console.log(err);
+//           else console.log("Successfully unchecked");
+//         });
+//       }
+//     }
+//   });
+//   res.redirect("/");
+// });
+
+app.post("/delete", (req, res) => {
+  const deletedItemId = req.body.bin;
+  Item.findByIdAndRemove(deletedItemId, (err) => {
+    if (err) console.log(err);
+    else console.log("Successfully deleted item from database.");
+  });
+  res.redirect("/");
 });
 
 app.get("/work", (req, res) => {
