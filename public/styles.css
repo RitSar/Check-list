@@ -11,7 +11,7 @@ h1 {
 }
 
 .box {
-  max-width: 400px;
+  max-width: 500px;
   margin: 50px auto;
   background: white;
   border-radius: 5px;
@@ -36,26 +36,31 @@ h1 {
   border-bottom: 0;
 }
 
-input:checked + p {
+.strike {
   text-decoration: line-through;
-  text-decoration-color: #a683e3;
-}
-
-input[type="checkbox"] {
-  margin: 20px;
+  text-decoration-color: #e64343;
 }
 
 p {
-  margin: 0;
-  padding: 20px;
+  margin-left: 20px;
   font-size: 20px;
   font-weight: 200;
   color: #00204a;
+  word-wrap: break-word;
+  width: 390px;
 }
-
+button.trash {
+  color: #00204a;
+  background-color: transparent;
+  border: none;
+  outline: none;
+}
+button.trash:hover {
+  color: red;
+}
 .bin {
   margin-left: auto;
-  padding-right: 10px;
+  margin-right: 15px;
 }
 
 .fa-plus {
@@ -63,6 +68,20 @@ p {
   top: 3px;
 }
 
+button.check {
+  border-radius: 50%;
+  margin-left: 15px;
+  color: transparent;
+  border: none;
+  outline: none;
+}
+
+button {
+  transition: 0.3s;
+}
+button.check:hover {
+  transform: scale(1.2, 1.2);
+}
 form.item {
   text-align: center;
   margin-left: 20px;
@@ -78,6 +97,14 @@ button.add {
   font-size: 30px;
   padding-bottom: 6px;
   border-width: 0;
+  margin-left: auto;
+  margin-right: 10px;
+}
+button.add:hover {
+  color: #a683e3;
+  background-color: #fff;
+  border: 1px solid #a683e3;
+  transform: scale(1.2, 1.2);
 }
 
 input[type="text"] {
@@ -88,7 +115,7 @@ input[type="text"] {
   background: transparent;
   font-size: 20px;
   font-weight: 200;
-  width: 313px;
+  width: 420px;
 }
 
 input[type="text"]:focus {

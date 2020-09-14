@@ -11,7 +11,8 @@ app.use(express.static("public"));
 
 mongoose.connect("mongodb://localhost:27017/todolistDB", {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false 
 });
 const itemsSchema = {
   name: String,
@@ -69,31 +70,31 @@ app.post("/", function(req, res) {
   res.redirect("/");
 });
 
-// app.post("/check", (req, res) => {
-//   const checkItemId = req.body.checkbox;
-//   let checker = "";
-//   Item.findById(checkItemId, (err, item) => {
-//     if (err) console.log(err);
-//     else {
-//       if (item.check == "off") {
-//         Item.findByIdAndUpdate(checkItemId, {
-//           check: "on"
-//         }, (err) => {
-//           if (err) console.log(err);
-//           else console.log("Successfully checked");
-//         });
-//       } else {
-//         Item.findByIdAndUpdate(checkItemId, {
-//           check: "off"
-//         }, (err) => {
-//           if (err) console.log(err);
-//           else console.log("Successfully unchecked");
-//         });
-//       }
-//     }
-//   });
-//   res.redirect("/");
-// });
+app.post("/check", (req, res) => {
+  const checkItemId = req.body.checkbox;
+  Item.findById(checkItemId, (err, item) => {
+    if (err) console.log(err);
+    else {
+      // console.log(item.check);
+      if (item.check == "off") {
+        Item.findByIdAndUpdate({_id: checkItemId}, {
+          check: "on"
+        }, (err) => {
+          if (err) console.log(err);
+          else console.log("Successfully checked");
+        });
+      } else if (item.check == "on") {
+        Item.findByIdAndUpdate({_id: checkItemId}, {
+          check: "off"
+        }, (err) => {
+          if (err) console.log(err);
+          else console.log("Successfully unchecked");
+        });
+      }
+    }
+  });
+  res.redirect("/");
+});
 
 app.post("/delete", (req, res) => {
   const deletedItemId = req.body.bin;

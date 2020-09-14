@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   </head>
   <body>
-
     <div class="box" id="heading">
       <h1><%= listTitle %></h1>
     </div>
@@ -18,11 +17,26 @@
 
       <%  newListItems.forEach((item)=>{ %>
         <div class="item">
-          <input type="checkbox" name="checkbox" onclick="this.form.submit();" value="<%= item._id %>">
-          <p><%= item.name %></p>
+
+          <% if(item.check == "on"){ %>
+            <form class="" action="/check" method="post">
+              <button id="button" type="submit" style="background-color: #e64343;" class="check" name="checkbox" value="<%= item._id %>">
+                .
+              </button>
+            </form>
+            <p class="strike"><%= item.name %></p>
+          <% } else { %>
+            <form class="" action="/check" method="post">
+              <button type="submit" style="background-color: #4aba68;" class="check" name="checkbox" value="<%= item._id %>">
+                .
+              </button>
+            </form>
+            <p><%= item.name %></p>
+          <% } %>
+
           <form class="bin" action="/delete" method="post">
-            <button type="submit" name="bin" value="<%= item._id %>">
-              <i class="fa fa-trash"></i>
+            <button class="trash" type="submit" name="bin" value="<%= item._id %>">
+              <i class="fa fa-trash fa-2x"></i>
             </button>
           </form>
         </div>
@@ -35,6 +49,10 @@
             </button>
           </form>
         </div>
-
+        <script type="text/javascript">
+          $(window).load(function () {
+            $("body").removeClass("preload");
+          });
+        </script>
       </body>
     </html>
