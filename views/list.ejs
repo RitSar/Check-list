@@ -38,13 +38,14 @@
             <button class="trash" type="submit" name="bin" value="<%= item._id %>">
               <i class="fa fa-trash fa-2x"></i>
             </button>
+            <input type="hidden" name="listName" value="<%= listTitle %>">
           </form>
         </div>
         <%  }) %>
 
           <form class="item" action="/" method="post">
             <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
-            <button class="add" type="submit" name="list" value=<%= listTitle %>>
+            <button class="add" type="submit" name="list" value="<%= listTitle %>">
               <i class="fa fa-plus"></i>
             </button>
           </form>
