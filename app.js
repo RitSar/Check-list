@@ -23,7 +23,7 @@ const itemsSchema = {
 const Item = mongoose.model("Item", itemsSchema);
 
 const item1 = new Item({
-  name: "Welcome to your todo list.",
+  name: "Welcome to your check list.",
   check: "off"
 });
 const item2 = new Item({
@@ -98,31 +98,67 @@ app.post("/", function(req, res) {
 
 app.post("/check", (req, res) => {
   const checkItemId = req.body.checkbox;
-  Item.findById(checkItemId, (err, item) => {
-    if (err) console.log(err);
-    else {
-      if (item.check == "off") {
-        Item.findByIdAndUpdate({
-          _id: checkItemId
-        }, {
-          check: "on"
-        }, (err) => {
-          if (err) console.log(err);
-          else console.log("Successfully checked");
-        });
-      } else if (item.check == "on") {
-        Item.findByIdAndUpdate({
-          _id: checkItemId
-        }, {
-          check: "off"
-        }, (err) => {
-          if (err) console.log(err);
-          else console.log("Successfully unchecked");
-        });
+  const listName = req.body.listName;
+  if (listName === date) {
+    Item.findById(checkItemId, (err, item) => {
+      if (err) console.log(err);
+      else {
+        if (item.check == "off") {
+          Item.findByIdAndUpdate({
+            _id: checkItemId
+          }, {
+            check: "on"
+          }, (err) => {
+            if (err) console.log(err);
+            else console.log("Successfully checked");
+          });
+        } else if (item.check == "on") {
+          Item.findByIdAndUpdate({
+            _id: checkItemId
+          }, {
+            check: "off"
+          }, (err) => {
+            if (err) console.log(err);
+            else console.log("Successfully unchecked");
+          });
+        }
       }
-    }
-  });
-  res.redirect("/");
+    });
+    res.redirect("/");
+  } else {
+    List.findOne({
+      name: listName
+    }, (err, all) => {
+      all.items.forEach((item, i) => {
+        if (item.id == checkItemId) {
+          if (item.check == "off") {
+            List.findOneAndUpdate({
+              'items._id': checkItemId
+            }, {
+              '$set': {
+                'items.$.check': "on"
+              }
+            }, (err) => {
+              if (err) console.log(err);
+            });
+          } else if (item.check == "on") {
+            List.findOneAndUpdate({
+              'items._id': checkItemId
+            }, {
+              '$set': {
+                'items.$.check': "off"
+              }
+            }, (err) => {
+              if (err) console.log(err);
+            });
+          }
+        }
+      });
+
+    });
+    res.redirect("/" + listName);
+  }
+
 });
 
 app.post("/delete", (req, res) => {

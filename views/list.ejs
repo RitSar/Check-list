@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   </head>
-  <body>
+  <body onload="transition()">
     <div class="box" id="heading">
       <h1><%= listTitle %></h1>
     </div>
@@ -23,6 +23,7 @@
               <button id="button" type="submit" style="background-color: #e64343;" class="check" name="checkbox" value="<%= item._id %>">
                 .
               </button>
+              <input type="hidden" name="listName" value="<%= listTitle %>">
             </form>
             <p class="strike"><%= item.name %></p>
           <% } else { %>
@@ -30,13 +31,14 @@
               <button type="submit" style="background-color: #4aba68;" class="check" name="checkbox" value="<%= item._id %>">
                 .
               </button>
+              <input type="hidden" name="listName" value="<%= listTitle %>">
             </form>
             <p><%= item.name %></p>
           <% } %>
 
           <form class="bin" action="/delete" method="post">
             <button class="trash" type="submit" name="bin" value="<%= item._id %>">
-              <i class="fa fa-trash fa-2x"></i>
+              <i class="fa fa-trash"></i>
             </button>
             <input type="hidden" name="listName" value="<%= listTitle %>">
           </form>
@@ -50,10 +52,16 @@
             </button>
           </form>
         </div>
+        <footer>
+          Rittik Sarkar
+        </footer>
         <script type="text/javascript">
-          $(window).load(function () {
-            $("body").removeClass("preload");
-          });
+          function transition() {
+            let buttons = document.querySelectorAll("button");
+            for (var i = 0; i < buttons.length; i++) {
+              buttons[i].style.transition = '0.3s';
+            }
+          }
         </script>
       </body>
     </html>
