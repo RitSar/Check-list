@@ -3,6 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Check List" content="A check list application to store all your tasks at one place.">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>To Do List</title>
     <link rel="stylesheet" href="styles.css">
@@ -20,7 +21,7 @@
 
           <% if(item.check == "on"){ %>
             <form class="" action="/check" method="post">
-              <button id="button" type="submit" style="background-color: #e64343;" class="check" name="checkbox" value="<%= item._id %>">
+              <button id="button" type="submit" style="background-color: #e64343;" class="check" name="checkbox" value="<%= item._id %>" aria-label="check">
                 .
               </button>
               <input type="hidden" name="listName" value="<%= listTitle %>">
@@ -28,7 +29,7 @@
             <p class="strike"><%= item.name %></p>
           <% } else { %>
             <form class="" action="/check" method="post">
-              <button type="submit" style="background-color: #4aba68;" class="check" name="checkbox" value="<%= item._id %>">
+              <button type="submit" style="background-color: #4aba68;" class="check" name="checkbox" value="<%= item._id %>" aria-label="check">
                 .
               </button>
               <input type="hidden" name="listName" value="<%= listTitle %>">
@@ -37,7 +38,7 @@
           <% } %>
 
           <form class="bin" action="/delete" method="post">
-            <button class="trash" type="submit" name="bin" value="<%= item._id %>">
+            <button class="trash" type="submit" name="bin" value="<%= item._id %>" aria-label="delete">
               <i class="fa fa-trash"></i>
             </button>
             <input type="hidden" name="listName" value="<%= listTitle %>">
@@ -46,9 +47,9 @@
         <%  }) %>
 
           <form class="item" action="/" method="post">
-            <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
-            <button class="add" type="submit" name="list" value="<%= listTitle %>">
-              <i class="fa fa-plus"></i>
+            <input type="text" name="newItem" placeholder="New Item" autocomplete="off" aria-label="add">
+            <button class="add" type="submit" name="list" value="<%= listTitle %>" aria-label="add">
+              <span class="plus">+</span>
             </button>
           </form>
         </div>
@@ -57,6 +58,7 @@
         </footer>
         <script type="text/javascript">
           function transition() {
+            // if (!window.location.hash) {   window.location = window.location + '';   window.location.reload(); }
             let buttons = document.querySelectorAll("button");
             for (var i = 0; i < buttons.length; i++) {
               buttons[i].style.transition = '0.3s';

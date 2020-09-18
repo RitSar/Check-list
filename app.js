@@ -10,8 +10,9 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static("public"));
-
-mongoose.connect("mongodb://localhost:27017/todolistDB", {
+// mongodb+srv://admin-rittik:rittik2000@cluster0.zn9dt.mongodb.net/todolistDB
+// mongodb://localhost:27017/todolistDB
+mongoose.connect("mongodb+srv://admin-rittik:rittik2000@cluster0.zn9dt.mongodb.net/todolistDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
