@@ -1,0 +1,4 @@
+User-agent: Googlebot
+Disallow: 
+
+sitemap: https://ritsar-checklist.herokuapp.com/
