@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>To Do List</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   </head>
   <body onload="transition()">
     <div class="box" id="heading">
@@ -39,7 +38,66 @@
 
           <form class="bin" action="/delete" method="post">
             <button class="trash" type="submit" name="bin" value="<%= item._id %>" aria-label="delete">
-              <i class="fa fa-trash"></i>
+
+              <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+              <svg
+                xmlns:dc="http://purl.org/dc/elements/1.1/"
+                xmlns:cc="http://creativecommons.org/ns#"
+                xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+                xmlns:svg="http://www.w3.org/2000/svg"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+                xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+                id="SVGRoot"
+                version="1.1"
+                viewbox="0 0 32.0 32.0"
+                height="32.0px"
+                width="32.0px"
+                inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+                sodipodi:docname="trash.svg">
+                <defs id="defs833"/>
+                <sodipodi:namedview
+                  id="base"
+                  pagecolor="#ffffff"
+                  bordercolor="#666666"
+                  borderopacity="1.0"
+                  inkscape:pageopacity="0.0"
+                  inkscape:pageshadow="2"
+                  inkscape:zoom="22.4"
+                  inkscape:cx="24.126401"
+                  inkscape:cy="14.259338"
+                  inkscape:document-units="px"
+                  inkscape:current-layer="layer1"
+                  inkscape:document-rotation="0"
+                  showgrid="true"
+                  inkscape:window-width="1375"
+                  inkscape:window-height="1040"
+                  inkscape:window-x="156"
+                  inkscape:window-y="0"
+                  inkscape:window-maximized="0">
+                  <inkscape:grid id="grid1403" type="xygrid"/>
+                </sodipodi:namedview>
+                <metadata id="metadata836">
+                  <rdf:rdf>
+                    <cc:work rdf:about="">
+                      <dc:format>image/svg+xml</dc:format>
+                      <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+                      <dc:title/>
+                    </cc:work>
+                  </rdf:rdf>
+                </metadata>
+                <g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1">
+                  <rect style="stroke-width:0.901" id="rect1415" width="14" height="21" x="9" y="8" ry="2"/>
+                  <rect style="fill:#ffffff;stroke-width:0.932624" id="rect1417" width="2" height="15" x="11" y="11" ry="1.6071428"/>
+                  <rect style="fill:#ffffff;stroke-width:0.932624" id="rect1419" width="2" height="15" x="19" y="11" ry="1.0714285"/>
+                  <rect style="fill:#ffffff;stroke-width:0.932624" id="rect1421" width="2" height="15" x="15" y="11" ry="1.0714285"/>
+                  <rect style="stroke-width:0.901" id="rect1426" width="18" height="2" x="7" y="7" ry="0.5" rx="0"/>
+                  <rect style="stroke-width:0.901" id="rect1428" width="4" height="1" x="14" y="5" ry="0.5" rx="0"/>
+                  <rect style="stroke-width:0.901" id="rect1433" width="1" height="3" x="14" y="5" ry="0.5"/>
+                  <rect style="stroke-width:0.901" id="rect1435" width="1" height="3" x="17" y="5" ry="0.5"/>
+                </g>
+              </svg>
+
             </button>
             <input type="hidden" name="listName" value="<%= listTitle %>">
           </form>
