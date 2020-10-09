@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const _ = require("lodash");
 
+require('dotenv').config()
+
 const app = express();
 app.set('view engine', 'ejs');
 
@@ -10,9 +12,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static("public"));
-// mongodb+srv://admin-rittik:rittik2000@cluster0.zn9dt.mongodb.net/todolistDB
-// mongodb://localhost:27017/todolistDB
-mongoose.connect("mongodb+srv://admin-rittik:rittik2000@cluster0.zn9dt.mongodb.net/todolistDB", {
+
+mongoose.connect(process.env.DATABASE, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
